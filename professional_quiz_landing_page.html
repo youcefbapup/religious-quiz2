@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختبر معلوماتك</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #f9f9f9, #e1f5fe);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 15px;
+    }
+    h1 {
+      color: #1976d2;
+      margin-bottom: 20px;
+    }
+    .question {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+    .options button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .options button:hover {
+      background-color: #e0e0e0;
+    }
+    .correct {
+      background-color: #4caf50 !important;
+      color: white;
+    }
+    .wrong {
+      background-color: #f44336 !important;
+      color: white;
+    }
+    #nextBtn, #finalLink {
+      display: none;
+      margin-top: 20px;
+    }
+    #nextBtn, #finalLink a {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 25px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>هل يمكنك الإجابة على هذه الأسئلة؟</h1>
+  <div id="quiz">
+    <div id="questionContainer">
+      <div class="question" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+    </div>
+    <div id="nextBtn" onclick="loadNextQuestion()">السؤال التالي</div>
+    <div id="finalLink"><a href="https://www.profitableratecpm.com/wirykjzgq?key=5e91ab386cc4b8df2181c29165e5e5fa" target="_blank">المزيد من الأسئلة</a></div>
+  </div>
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "من هو أول من أسلم من الصبيان؟",
+      answers: ["عمر بن الخطاب", "علي بن أبي طالب", "عثمان بن عفان", "خالد بن الوليد"],
+      correct: 1
+    },
+    {
+      q: "كم عدد ركعات صلاة الفجر؟",
+      answers: ["4", "3", "2", "1"],
+      correct: 2
+    },
+    {
+      q: "ما اسم والد النبي محمد ﷺ؟",
+      answers: ["عبد الله", "عبد المطلب", "أبو طالب", "حمزة"],
+      correct: 0
+    }
+  ];
+
+  let currentQuestion = 0;
+
+  function loadQuestion(index) {
+    document.getElementById("nextBtn").style.display = "none";
+    const q = questions[index];
+    document.getElementById("questionText").innerText = q.q;
+    const options = document.getElementById("optionsContainer");
+    options.innerHTML = "";
+    q.answers.forEach((answer, i) => {
+      const btn = document.createElement("button");
+      btn.innerText = answer;
+      btn.onclick = () => checkAnswer(i, q.correct, btn);
+      options.appendChild(btn);
+    });
+  }
+
+  function checkAnswer(selected, correct, button) {
+    const buttons = document.querySelectorAll("#optionsContainer button");
+    buttons.forEach(btn => btn.disabled = true);
+    if (selected === correct) {
+      button.classList.add("correct");
+    } else {
+      button.classList.add("wrong");
+      buttons[correct].classList.add("correct");
+    }
+
+    if (currentQuestion < questions.length - 1) {
+      document.getElementById("nextBtn").style.display = "inline-block";
+    } else {
+      document.getElementById("finalLink").style.display = "block";
+    }
+  }
+
+  function loadNextQuestion() {
+    currentQuestion++;
+    loadQuestion(currentQuestion);
+  }
+
+  window.onload = () => {
+    loadQuestion(currentQuestion);
+  };
+</script>
+
+</body>
+</html>
